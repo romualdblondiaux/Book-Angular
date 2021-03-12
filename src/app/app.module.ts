@@ -15,6 +15,12 @@ import { AuthService } from './services/auth.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
+import { CdListComponent } from './cd-list/cd-list.component';
+import { CdFormComponent } from './cd-list/cd-form/cd-form.component';
+import { SingleCdComponent } from './cd-list/single-cd/single-cd.component';
+import { DvdListComponent } from './dvd-list/dvd-list.component';
+import { DvdFormComponent } from './dvd-list/dvd-form/dvd-form.component';
+import { SingleDvdComponent } from './dvd-list/single-dvd/single-dvd.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
@@ -35,7 +41,13 @@ const appRoutes: Routes = [
     SingleBookComponent,
     BookFormComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CdListComponent,
+    CdFormComponent,
+    SingleCdComponent,
+    DvdListComponent,
+    DvdFormComponent,
+    SingleDvdComponent
   ],
   imports: [
     BrowserModule,

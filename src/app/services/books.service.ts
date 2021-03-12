@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { Subject } from 'rxjs/Subject';
@@ -6,10 +7,12 @@ import { Book } from '../models/book.model';
 @Injectable()
 export class BooksService {
 
-  books: Book[] = [];
-  booksSubject = new Subject<Book[]>();
 
-  constructor() {
+  booksSubject = new Subject<any[]>();
+
+  private books = [];
+
+  constructor(private httpClient: HttpClient) {
     this.getBooks();
   }
 
@@ -83,5 +86,36 @@ export class BooksService {
         );
       }
     );
+  }
+
+  addBook(titre: string, auteur: string, synopsis: string, image: string): void {
+    const bookObject = {
+      id: 0,
+      titre: '',
+      auteur: '',
+      synopsis: '',
+      image: '',
+    };
+    bookObject.titre = titre;
+    bookObject.auteur = auteur;
+    bookObject.synopsis = synopsis;
+    bookObject.image = image;
+    bookObject.id = this.books[(this.books.length - 1)].id + 1;
+
+    this.books.push(bookObject);
+    this.emitBooks();
+  }
+
+  saveBooksToServer(): void {
+    this.httpClient
+      .post('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json', this.books)
+      .subscribe(
+        () => {
+          console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
 }
 }
