@@ -35,8 +35,6 @@ const appRoutes: Routes = [
   { path: 'dvd', canActivate: [AuthGuardService], component: DvdListComponent },
   { path: 'dvd/new', canActivate: [AuthGuardService], component: DvdFormComponent },
   { path: 'dvd/view/:id', canActivate: [AuthGuardService], component: SingleDvdComponent },
-  { path: '', redirectTo: 'books', pathMatch: 'full' },
-  { path: '**', redirectTo: 'books' }
 ];
 
 @NgModule({
