@@ -108,7 +108,7 @@ export class BooksService {
 
   saveBooksToServer(): void {
     this.httpClient
-      .post('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json', this.books)
+      .put('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json', this.books)
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
@@ -117,5 +117,20 @@ export class BooksService {
           console.log('Erreur ! : ' + error);
         }
       );
-}
+  }
+
+  getBooksFromServer(): void {
+    this.httpClient
+      .get<any[]>('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json')
+      .subscribe(
+        (response) => {
+          this.books = response;
+          this.emitBooks();
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+  }
+
 }

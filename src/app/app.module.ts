@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,6 +29,12 @@ const appRoutes: Routes = [
   { path: 'books', canActivate: [AuthGuardService], component: BookListComponent },
   { path: 'books/new', canActivate: [AuthGuardService], component: BookFormComponent },
   { path: 'books/view/:id', canActivate: [AuthGuardService], component: SingleBookComponent },
+  { path: 'cd', canActivate: [AuthGuardService], component: CdListComponent },
+  { path: 'cd/new', canActivate: [AuthGuardService], component: CdFormComponent },
+  { path: 'cd/view/:id', canActivate: [AuthGuardService], component: SingleCdComponent },
+  { path: 'dvd', canActivate: [AuthGuardService], component: DvdListComponent },
+  { path: 'dvd/new', canActivate: [AuthGuardService], component: DvdFormComponent },
+  { path: 'dvd/view/:id', canActivate: [AuthGuardService], component: SingleDvdComponent },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', redirectTo: 'books' }
 ];
@@ -47,7 +54,7 @@ const appRoutes: Routes = [
     SingleCdComponent,
     DvdListComponent,
     DvdFormComponent,
-    SingleDvdComponent
+    SingleDvdComponent,
   ],
   imports: [
     BrowserModule,

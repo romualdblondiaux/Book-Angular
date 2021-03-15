@@ -37,7 +37,17 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/books', 'view', id]);
   }
 
+  onSave(): void {
+    this.booksService.saveBooksToServer();
+  }
+
+  onFetch(): void {
+    this.booksService.getBooksFromServer();
+  }
+
   ngOnDestroy(): void {
     this.booksSubscription.unsubscribe();
   }
+
+
 }
