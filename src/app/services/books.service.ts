@@ -8,7 +8,7 @@ import { Book } from '../models/book.model';
 export class BooksService {
 
 
-  booksSubject = new Subject<any[]>();
+  booksSubject = new Subject<Book[]>();
 
   private books = [];
 

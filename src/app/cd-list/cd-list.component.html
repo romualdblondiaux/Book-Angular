@@ -1,1 +1,20 @@
-<p>cd-list works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Vos CD</h2>
+    <div class="list-group">
+      <button
+        class="list-group-item"
+        *ngFor="let cd of cds; let i = index"
+        (click)="onViewCd(i)">
+        <h3 class="list-group-item-heading">
+          {{ cd.title }}
+          <button class="btn btn-default pull-right" (click)="onDeleteCd(cd)">
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
+        </h3>
+        <p class="list-group-item-text">{{ cd.author }}</p>
+      </button>
+    </div>
+    <button class="btn btn-primary" (click)="onNewCd()">Nouveau CD</button>
+  </div>
+</div>
