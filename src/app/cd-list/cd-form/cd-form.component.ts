@@ -1,3 +1,7 @@
+import { Cd } from './../../models/cd.model';
+import { Router } from '@angular/router';
+import { CdsService } from './../../services/cds.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CdFormComponent implements OnInit {
 
-  constructor() { }
+  cdForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder, private cdsService: CdsService,
+              private router: Router) { }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.cdForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      artiste: ['', Validators.required],
+      synopsis: ''
+    });
+  }
+
+  onSaveCd() {
+    const title = this.cdForm.get('title').value;
+    const artiste = this.cdForm.get('artiste').value;
+    const synopsis = this.cdForm.get('synopsis').value;
+    const newCd = new Cd(title, artiste);
+    newCd.synopsis = synopsis;
+    this.cdsService.createNewCd(newCd);
+    this.router.navigate(['/cd']);
   }
 
 }

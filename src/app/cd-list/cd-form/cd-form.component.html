@@ -1,1 +1,40 @@
-<p>cd-form works!</p>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2>Enregistrer un nouveau CD</h2>
+    <form [formGroup]="cdForm" (ngSubmit)="onSaveCd()">
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <input type="text" id="title"
+               class="form-control" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label for="artiste">Artiste</label>
+        <input type="text" id="artiste"
+               class="form-control" formControlName="artiste">
+      </div>
+      <div class="form-group">
+        <label for="synopsis">Synopsis</label>
+        <textarea id="synopsis"
+                  class="form-control" formControlName="synopsis">
+        </textarea>
+      </div>
+
+      <!--
+      <div class="form-group">
+        <label for="image"><h4>Ajouter une photo</h4></label>
+        <input type="file" (change)="detectFiles($event)"
+               class="form-control" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+      </div>
+
+      [disabled]="cdForm.invalid || fileIsUploading"
+      -->
+
+      <button class="btn btn-success" (click)="onSaveCd()" [disabled]="cdForm.invalid"
+            type="submit">Enregistrer
+      </button>
+
+
+    </form>
+  </div>
+</div>

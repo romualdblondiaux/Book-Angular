@@ -33,7 +33,7 @@ export class DvdListComponent implements OnInit, OnDestroy {
     this.dvdsService.removeDvd(dvd);
   }
 
-  onViewdvd(id: number): void {
+  onViewDvd(id: number): void {
     this.router.navigate(['/dvds', 'view', id]);
   }
 

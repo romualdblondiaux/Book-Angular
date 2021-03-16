@@ -30,11 +30,13 @@ const appRoutes: Routes = [
   { path: 'books/new', canActivate: [AuthGuardService], component: BookFormComponent },
   { path: 'books/view/:id', canActivate: [AuthGuardService], component: SingleBookComponent },
   { path: 'cd', canActivate: [AuthGuardService], component: CdListComponent },
-  { path: 'cd/new', canActivate: [AuthGuardService], component: CdFormComponent },
-  { path: 'cd/view/:id', canActivate: [AuthGuardService], component: SingleCdComponent },
+  { path: 'cds/new', canActivate: [AuthGuardService], component: CdFormComponent },
+  { path: 'cds/view/:id', canActivate: [AuthGuardService], component: SingleCdComponent },
   { path: 'dvd', canActivate: [AuthGuardService], component: DvdListComponent },
-  { path: 'dvd/new', canActivate: [AuthGuardService], component: DvdFormComponent },
-  { path: 'dvd/view/:id', canActivate: [AuthGuardService], component: SingleDvdComponent },
+  { path: 'dvds/new', canActivate: [AuthGuardService], component: DvdFormComponent },
+  { path: 'dvds/view/:id', canActivate: [AuthGuardService], component: SingleDvdComponent },
+  { path: '', redirectTo: 'books', pathMatch: 'full' },
+  { path: '**', redirectTo: 'books' }
 ];
 
 @NgModule({
