@@ -12,6 +12,9 @@ import { Component, OnInit } from '@angular/core';
 export class CdFormComponent implements OnInit {
 
   cdForm: FormGroup;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
 
   constructor(private formBuilder: FormBuilder, private cdsService: CdsService,
               private router: Router) { }
@@ -34,8 +37,26 @@ export class CdFormComponent implements OnInit {
     const synopsis = this.cdForm.get('synopsis').value;
     const newCd = new Cd(title, artiste);
     newCd.synopsis = synopsis;
+    if (this.fileUrl && this.fileUrl !== '') {
+      newCd.photo = this.fileUrl;
+    }
     this.cdsService.createNewCd(newCd);
-    this.router.navigate(['/cd']);
+    this.cdsService.saveCdsToServer();
+    this.router.navigate(['/books']);
   }
 
+  onUploadFile(file: File): void {
+    this.fileIsUploading = true;
+    this.cdsService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+  }
+
+  detectFiles(event): void {
+    this.onUploadFile(event.target.files[0]);
+  }
 }

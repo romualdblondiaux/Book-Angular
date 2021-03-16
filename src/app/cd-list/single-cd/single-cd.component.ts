@@ -26,7 +26,7 @@ export class SingleCdComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/cd']);
+    this.router.navigate(['/books']);
   }
 
 }

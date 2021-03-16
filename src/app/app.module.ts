@@ -1,3 +1,5 @@
+import { DvdsService } from './services/dvds.service';
+import { CdsService } from './services/cds.service';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -66,7 +68,10 @@ const appRoutes: Routes = [
   providers: [
     AuthService,
     AuthGuardService,
-    BooksService],
+    BooksService,
+    CdsService,
+    DvdsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,9 @@ import { Dvd } from '../../models/dvd.model';
 export class DvdFormComponent implements OnInit {
 
   dvdForm: FormGroup;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
 
   constructor(private formBuilder: FormBuilder, private dvdsService: DvdsService,
               private router: Router) { }
@@ -34,8 +37,26 @@ export class DvdFormComponent implements OnInit {
     const synopsis = this.dvdForm.get('synopsis').value;
     const newDvd = new Dvd(title, genre);
     newDvd.synopsis = synopsis;
+    if (this.fileUrl && this.fileUrl !== '') {
+      newDvd.photo = this.fileUrl;
+    }
     this.dvdsService.createNewDvd(newDvd);
-    this.router.navigate(['/dvd']);
+    this.dvdsService.saveDvdsToServer();
+    this.router.navigate(['/books']);
   }
 
+  onUploadFile(file: File): void {
+    this.fileIsUploading = true;
+    this.dvdsService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+  }
+
+  detectFiles(event): void {
+    this.onUploadFile(event.target.files[0]);
+  }
 }

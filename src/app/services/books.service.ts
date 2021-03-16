@@ -4,11 +4,11 @@ import firebase from 'firebase';
 import { Subject } from 'rxjs/Subject';
 import { Book } from '../models/book.model';
 
+
 @Injectable()
 export class BooksService {
 
-
-  booksSubject = new Subject<Book[]>();
+  booksSubject = new Subject<any[]>();
 
   private books = [];
 
@@ -54,6 +54,17 @@ export class BooksService {
   }
 
   removeBook(book: Book): void {
+    if (book.photo) {
+      const storageRef = firebase.storage().refFromURL(book.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
     const bookIndexToRemove = this.books.findIndex(
       (bookEl) => {
         if (bookEl === book) {
@@ -71,7 +82,7 @@ export class BooksService {
       (resolve, reject) => {
         const almostUniqueFileName = Date.now().toString();
         const upload = firebase.storage().ref()
-          .child('images/' + almostUniqueFileName + file.name).put(file);
+          .child('livres/' + almostUniqueFileName + file.name).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
             console.log('Chargement…');
@@ -108,7 +119,7 @@ export class BooksService {
 
   saveBooksToServer(): void {
     this.httpClient
-      .put('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json', this.books)
+      .put('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/livres.json', this.books)
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
@@ -121,7 +132,7 @@ export class BooksService {
 
   getBooksFromServer(): void {
     this.httpClient
-      .get<any[]>('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/books.json')
+      .get<any[]>('https://book-16178-default-rtdb.europe-west1.firebasedatabase.app/livres.json')
       .subscribe(
         (response) => {
           this.books = response;
@@ -132,5 +143,6 @@ export class BooksService {
         }
       );
   }
+
 
 }

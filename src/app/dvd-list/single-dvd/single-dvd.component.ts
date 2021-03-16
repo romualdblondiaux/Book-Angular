@@ -26,7 +26,7 @@ export class SingleDvdComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/dvd']);
+    this.router.navigate(['/books']);
   }
 
 }

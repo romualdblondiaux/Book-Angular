@@ -8,15 +8,63 @@
         (click)="onViewBook(i)">
         <h3 class="list-group-item-heading">
           {{ book.title }}
-          <button class="btn btn-default pull-right" (click)="onDeleteBook(book)">
+          <button class="btn btn-danger pull-right" (click)="onDeleteBook(book)">
             <span class="glyphicon glyphicon-minus"></span>
           </button>
         </h3>
         <p class="list-group-item-text">{{ book.author }}</p>
       </button>
     </div>
-    <button class="btn btn-primary mr-3" (click)="onNewBook()">Nouveau livre</button>
-    <button class="btn btn-danger mr-3" (click)="onSave()">Enregistrer les livres</button>
-    <button class="btn btn-success" (click)="onFetch()">Récuperer les livres</button>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Vos CD</h2>
+    <div class="list-group">
+      <button
+        class="list-group-item"
+        *ngFor="let cd of cds; let i = index"
+        (click)="onViewCd(i)">
+        <h3 class="list-group-item-heading">
+          {{ cd.title }}
+          <button class="btn btn-danger pull-right" (click)="onDeleteCd(cd)">
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
+        </h3>
+        <p class="list-group-item-text">{{ cd.artiste }}</p>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Vos DVD</h2>
+    <div class="list-group">
+      <button
+        class="list-group-item"
+        *ngFor="let dvd of dvds; let i = index"
+        (click)="onViewDvd(i)">
+        <h3 class="list-group-item-heading">
+          {{ dvd.title }}
+          <button class="btn btn-danger pull-right" (click)="onDeleteDvd(dvd)">
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
+        </h3>
+        <p class="list-group-item-text">{{ dvd.genre }}</p>
+      </button>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <button class="btn btn-primary mt-3 mr-3" (click)="onNewBook()">Nouveau livre</button>
+    <button class="btn btn-primary mt-3 mr-3" (click)="onNewCd()">Nouveau CD</button>
+    <button class="btn btn-primary mt-3 mr-3" (click)="onNewDvd()">Nouveau DVD</button>
+
+    <button class="btn btn-warning mt-3 ml-3 pull-right" (click)="onSave()">Enregistrer les données</button>
+    <button class="btn btn-success mt-3 pull-right" (click)="onFetch()">Récuperer les données</button>
+
+  </div>
+</div>
+
+
